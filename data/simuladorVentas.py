@@ -1,8 +1,12 @@
 # FUNCION GENERADORA DE N VENTAS QUE PERMITA CREAR MOCKS O DATOS SEMILLA PARA LA RUTINA DE ANAISIS
 import random
+import string
+import sys
 from datetime import datetime, timedelta
 
-def generar_ventas(numero_ventas, limite_productos=5):
+sys.stdout.reconfigure(encoding='utf-8')
+
+def generar_ventas(numero_ventas, limite_productos=6):
     
     # SIMULAR UNA LISTA DE PRODUCTOS
     # PARA OPTIMIZAR:
@@ -33,24 +37,67 @@ def generar_ventas(numero_ventas, limite_productos=5):
 
     # GENERAR LAS N VENTAS QUE ME PIDEN
     ventas=[]
+    DESCUENTO = 0.40
     for _ in range(numero_ventas):
-        cantidad_productos = random.randint(1, limite_productos)
+        detalle_productos = []
+        total_venta = 0
+        fecha =fechaInicio+timedelta(days=random.randint(0,60))
 
-        productos_seleccionados = random.sample(productos, cantidad_productos) #¿Cómo hago para agregar mas de un producto a la simulacion?
+        cantidad_productos = random.randint(1, limite_productos)        
+
+        productos_seleccionados = random.sample(productos, min(cantidad_productos, len(productos)))
 
         for producto in productos_seleccionados:
-            cantidad = random.randint(1,5)
+            cantidad = random.randint(1, 3)
             precio = producto['precio']
-            fecha =fechaInicio+timedelta(days=random.randint(0,60))
-        ventas.append(
-            {
-                'producto': producto['nombre'],
-                'precio': precio,
-                'talla':random.choice(tallas),
-                'cantidad':cantidad,
-                'vendedor':random.choice(vendedores),
+            if producto['descuento'] == True:
+                precio_final = precio * (1 - DESCUENTO)
+            else:
+                precio_final = precio
+            subtotal = precio_final * cantidad
+            
+            detalle_productos.append(
+                {
+                    'producto': producto['nombre'],
+                    'precio': precio,
+                    'talla':random.choice(tallas),
+                    'cantidad':cantidad,
+                    'descuento':producto['descuento'],
+                    'precio_unitario_descuento': precio_final,
+                    'subtotal':subtotal,
+                    'fecha': fecha
+                } 
+            )
+            total_venta += precio_final
+            venta={
+                'productos': detalle_productos,
+                'vendedor': random.choice(vendedores),
                 'fecha':fecha,
-                'total':cantidad*precio
-            } 
-        )
+                'total': total_venta
+            }
+            # INYECTAR ERRORES DE CALIDAD EN LOS DATOS 
+            probabilidadError = random.random()
+
+            if probabilidadError < 0.15:
+                venta['productos'][0]['producto'] = f" {venta['productos'][0]['producto']} "
+            elif probabilidadError < 0.30:
+                venta['vendedor'] = venta['vendedor'].upper()
+            elif probabilidadError < 0.40:
+                venta['productos'][0]['talla'] = 'medio'
+            elif probabilidadError < 0.50:
+                venta['productos'][0]['cantidad'] = random.choice([0, -1, None])
+            elif probabilidadError < 0.60:
+                venta['productos'][0]['precio'] = None
+            elif probabilidadError < 0.70:
+                venta['fecha'] = fecha.strftime("%d/%m/%Y")
+            elif probabilidadError < 0.80:
+                venta['total'] = random.randint(1000, 5000)
+            elif probabilidadError < 0.90:
+                venta['productos'][0]['producto'] = venta['productos'][0]['producto'].lower()
+            
+        ventas.append(venta)
+    # Inyectar datos duplicados
+    if len(ventas)>= 6:
+        ventas.append(ventas[0].copy())
+        ventas.append(ventas[1].copy())
     return ventas
