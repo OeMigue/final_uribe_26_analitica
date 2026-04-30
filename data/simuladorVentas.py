@@ -14,23 +14,23 @@ def generar_ventas(numero_ventas, limite_productos=6):
         # CONSUMIR API
 
     productos  = [
-        {'nombre':'Chaqueta de Mujer Shacket Silueta Amplia Denim Liviano con Parches Varsity en Algodón', 'precio':150000, 'descuento':True},
-        {'nombre':'Vestido Casual de Algodón con Estampado Floral y Cinturón Ajustable', 'precio':82000, 'descuento':False},
+        {'nombre':'Chaqueta de Mujer Shacket Silueta Amplia Denim Liviano con Parches Varsity en Algodon', 'precio':150000, 'descuento':True},
+        {'nombre':'Vestido Casual de Algodon con Estampado Floral y Cinturon Ajustable', 'precio':82000, 'descuento':False},
         {'nombre':'Zapatos Deportivos Running Unisex con Suela Antideslizante y Malla Transpirable', 'precio':98000, 'descuento':True},
         {'nombre':'Camisa Formal Slim Fit Manga Larga en Lino Texturizado para Hombre', 'precio':76000, 'descuento':False},
-        {'nombre':'Pantalón Cargo Multibolsillos con Cintura Elástica y Cordón Ajustable', 'precio':68000, 'descuento':True},
-        {'nombre':'Blusa de Satén Brillante con Cuello Mao y Mangas Globo', 'precio':54000, 'descuento':False},
-        {'nombre':'Suéter Oversize de Punto Grueso con Cuello Alto y Diseño Trenzado', 'precio':90000, 'descuento':True},
-        {'nombre':'Bolso Tote Ecológico de Yute con Forro Interior y Bolsillo Interno', 'precio':42000, 'descuento':False},
-        {'nombre':'Reloj Analógico Minimalista con Correa de Acero Inoxidable y Esfera Negra', 'precio':125000, 'descuento':True},
-        {'nombre':'Gafas de Sol UV400 Estilo Aviador con Montura Metálica y Lentes Polarizadas', 'precio':65000, 'descuento':False}
+        {'nombre':'Pantalon Cargo Multibolsillos con Cintura Elastica y Cordon Ajustable', 'precio':68000, 'descuento':True},
+        {'nombre':'Blusa de Saten Brillante con Cuello Mao y Mangas Globo', 'precio':54000, 'descuento':False},
+        {'nombre':'Sueter Oversize de Punto Grueso con Cuello Alto y Diseño Trenzado', 'precio':90000, 'descuento':True},
+        {'nombre':'Bolso Tote Ecologico de Yute con Forro Interior y Bolsillo Interno', 'precio':42000, 'descuento':False},
+        {'nombre':'Reloj Analogico Minimalista con Correa de Acero Inoxidable y Esfera Negra', 'precio':125000, 'descuento':True},
+        {'nombre':'Gafas de Sol UV400 Estilo Aviador con Montura Metalica y Lentes Polarizadas', 'precio':65000, 'descuento':False}
     ]
 
     # SIMULAR LISTA DE TALLAS 
     tallas  = ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL',]
 
     # SIMULAR VENDEDOR ASOCIADO
-    vendedores = ['Miguel Cardona', 'Nicolás Parra', 'Sebastian Gómez', 'Ana Gómez', 'Carlos Mejía', 'Mariana Díaz', 'Andrés Vargas', 'Esteban Agudelo', 'Diego Castillo', 'Valeria López']
+    vendedores = ['Miguel Cardona', 'Nicolas Parra', 'Sebastian Gomez', 'Ana Gomez', 'Carlos Mejia', 'Mariana Diaz', 'Andres Vargas', 'Esteban Agudelo', 'Diego Castillo', 'Valeria Lopez']
 
     # SIMULAR FECHA
     fechaInicio =datetime(2026,1,2)
